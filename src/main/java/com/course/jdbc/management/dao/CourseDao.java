@@ -113,4 +113,15 @@ public class CourseDao {
         });
         return data;
     }
+
+    public void insertbatchUpate(List<Course> courseList){
+        String insertQuery = "INSERT INTO course (courseId, description, price, title, categoryId) VALUES (?, ?, ?, ?, ?)";
+        int[][] ints = jdbcTemplate.batchUpdate(insertQuery, courseList, courseList.size(), ((ps, course) -> {
+            ps.setInt(1, course.getCourseId());
+            ps.setString(2, course.getDescription());
+            ps.setInt(3, course.getPrice());
+            ps.setString(4, course.getTitle());
+            ps.setInt(5, course.getCategoryId());
+        }));
+    }
 }
