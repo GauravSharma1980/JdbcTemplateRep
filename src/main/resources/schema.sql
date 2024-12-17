@@ -3,3 +3,15 @@ CREATE TABLE IF NOT EXISTS course ( courseId int PRIMARY KEY, description varcha
 categoryId int not null,
  foreign key(categoryId) references category(id) ON DELETE CASCADE ON UPDATE CASCADE );
 
+SELECT
+    c.courseId,
+    c.title,
+    c.description,
+    c.price,
+    cat.name AS category_name
+FROM
+    course c
+INNER JOIN
+    category cat
+ON
+    c.categoryId = cat.id;

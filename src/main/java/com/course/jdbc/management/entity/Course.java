@@ -6,6 +6,19 @@ public class Course {
     private int courseId;
     private String description;
     private int price;
+    private int categoryId;
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public Course(){
+
+    }
 
     public Course(String title, int courseId, String description, int price) {
         this.title = title;

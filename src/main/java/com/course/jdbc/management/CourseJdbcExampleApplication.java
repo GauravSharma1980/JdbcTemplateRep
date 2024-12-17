@@ -1,7 +1,9 @@
 package com.course.jdbc.management;
 
 import com.course.jdbc.management.dao.CategoryDao;
+import com.course.jdbc.management.dao.CourseDao;
 import com.course.jdbc.management.entity.Category;
+import com.course.jdbc.management.entity.Course;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -14,6 +16,10 @@ public class CourseJdbcExampleApplication implements CommandLineRunner {
 
 	@Autowired
 	CategoryDao categoryDao;
+
+	@Autowired
+	CourseDao courseDao;
+
 	public static void main(String[] args) {
 		SpringApplication.run(CourseJdbcExampleApplication.class, args);
 	}
@@ -39,5 +45,18 @@ public class CourseJdbcExampleApplication implements CommandLineRunner {
 
 		Category category = categoryDao.getCategoryByIdUsingRowMapper("3");
 		System.out.println("name"+category.getName());
+
+		Course course = new Course();
+		course.setCategoryId(2);
+		course.setPrice(100);
+		course.setTitle("Main hoo");
+		course.setDescription("desc");
+		course.setCourseId(5);
+		int save = courseDao.save(course);
+		System.out.println("no of rows affected"+save);
+
+		courseDao.getCategoryCourseData().forEach(System.out::println);
 	}
+
+
 }
